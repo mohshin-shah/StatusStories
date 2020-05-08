@@ -18,15 +18,6 @@ struct StoryListViewModel {
     }
 }
 
-struct Post {}
-
-struct StoryViewModel {
-    private(set) var posts: [Post]
-    internal init(posts: [Post]) {
-        self.posts = posts
-    }
-}
-
 class StatusStoriesTests: XCTestCase {
     
     // MARK: - Properties
@@ -38,35 +29,21 @@ class StatusStoriesTests: XCTestCase {
     }
         
     func test_initialize() {
-        let sut = makeSUT()
+        let sut = makeStoryList()
         XCTAssertNotNil(sut)
     }
     
     func test_initialize_no_stories() {
-        let sut = makeSUT()
+        let sut = makeStoryList()
         XCTAssertTrue(sut.stories.isEmpty)
     }
-    
-    func test_story_hasAtleastOnePost() {
-        let story = makeStory(with: Post())
-        XCTAssertTrue(story.posts.count == 1)
-    }
-    
+        
     func test_insert_one() {
-        let story = makeStory(with: Post())
-        let sut = makeSUT(with: [story])
+        let post = Post()
+        let story = makeStory(with: [post])
+        let sut = makeStoryList(with: [story])
         
         XCTAssertTrue(sut.stories.count == 1)
-    }
-    
-    
-    //MARK: Helpers
-    private func makeSUT(with stories: [StoryViewModel] = []) -> StoryListViewModel {
-        StoryListViewModel(stories: stories)
-    }
-    
-    private func makeStory(with posts: Post...) -> StoryViewModel {
-        return StoryViewModel(posts: posts)
-    }
+    }        
 }
 
