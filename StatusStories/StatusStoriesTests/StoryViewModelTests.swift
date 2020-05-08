@@ -8,10 +8,14 @@
 
 import XCTest
 
-struct Post {}
+struct Post {
+    var isRead: Bool = false
+}
 
 struct StoryViewModel {
     private(set) var posts: [Post]
+    var isRead: Bool = false
+    
     init(posts: [Post]) {
         self.posts = posts
     }
@@ -30,5 +34,16 @@ class StoryViewModelTests: XCTestCase {
         let posts = Array(0..<numberOfPosts).map { _ in Post() }
         let sut = makeStory(with: posts)
         XCTAssertTrue(sut.posts.count == numberOfPosts)
-    }    
+    }
+    
+    func test_post_isUnread() {
+        let post = Post()
+        XCTAssertFalse(post.isRead)
+    }
+    
+    func test_post_isUnread_singlePost() {
+        let post = Post()
+        let sut = makeStory(with: [post])
+        XCTAssertFalse(sut.isRead)
+    }
 }

@@ -44,6 +44,14 @@ class StatusStoriesTests: XCTestCase {
         let sut = makeStoryList(with: [story])
         
         XCTAssertTrue(sut.stories.count == 1)
-    }        
+    }
+    
+    func test_insert_many() {
+        let numberOfStories = 5
+        let stories = Array(0..<numberOfStories).map { _ in makeStory(with: [Post()]) }
+        let sut = makeStoryList(with: stories)
+        
+        XCTAssertTrue(sut.stories.count == numberOfStories)
+    }
 }
 
