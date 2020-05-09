@@ -8,11 +8,15 @@
 
 import Foundation
 
-//MARK: Helpers
+// MARK: Helpers
+
 func makeStoryList(with stories: [StoryViewModel] = []) -> StoryListViewModel {
     StoryListViewModel(stories: stories)
 }
 
 func makeStory(with posts: [Post]) -> StoryViewModel {
-    return StoryViewModel(posts: posts)
+    guard let storyViewModel = StoryViewModel(posts: posts) else {
+        fatalError("StoryViewModel can not be created from the provided posts")
+    }
+    return storyViewModel
 }

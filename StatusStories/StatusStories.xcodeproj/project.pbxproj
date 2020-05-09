@@ -128,10 +128,10 @@
 		A2F357712461C49A009E94B3 /* StatusStoriesTests */ = {
 			isa = PBXGroup;
 			children = (
+				FB5F18CA24656625002757C2 /* Helpers.swift */,
 				A2F357722461C49A009E94B3 /* StoryListViewModelTests.swift */,
 				FB5F18C82465655F002757C2 /* StoryViewModelTests.swift */,
 				A2F357742461C49A009E94B3 /* Info.plist */,
-				FB5F18CA24656625002757C2 /* Helpers.swift */,
 			);
 			path = StatusStoriesTests;
 			sourceTree = "<group>";
