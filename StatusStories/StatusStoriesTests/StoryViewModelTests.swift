@@ -12,7 +12,7 @@ struct Post: Equatable {
     var text: String = ""
 }
 
-class StoryViewModel: NSObject {
+class StoryViewModel: Equatable {
     
     private(set) var posts: [Post]
     private(set) var isOpen = false
@@ -27,6 +27,11 @@ class StoryViewModel: NSObject {
     func setSelected(_ isSelected: Bool) {
         isOpen = isSelected
     }
+    
+    static func == (lhs: StoryViewModel, rhs: StoryViewModel) -> Bool {
+        lhs.posts == rhs.posts
+    }
+
 }
 
 class StoryViewModelTests: XCTestCase {
