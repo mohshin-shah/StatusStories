@@ -71,7 +71,7 @@ class StatusStoriesTests: XCTestCase {
         XCTAssertTrue(sut.state == .list)
     }
     
-    func test_select_story() {
+    func test_selected_state() {
         let post = Post()
         let storyViewModel = makeStory(with: [post])
         let sut = makeStoryList(with: [storyViewModel])
@@ -85,7 +85,7 @@ class StatusStoriesTests: XCTestCase {
         }
     }
     
-    func test_select_story_should_open() {
+    func test_open_story() {
         let post = Post()
         let storyViewModel = makeStory(with: [post])
         let sut = makeStoryList(with: [storyViewModel])
@@ -93,5 +93,16 @@ class StatusStoriesTests: XCTestCase {
         sut.select(storyViewModel)
         XCTAssertTrue(storyViewModel.isOpen)
     }
+    
+    func test_close_story() {
+        let post = Post()
+        let storyViewModel = makeStory(with: [post])
+        let sut = makeStoryList(with: [storyViewModel])
+        
+        sut.select(storyViewModel)
+        storyViewModel.setSelected(false)
+        XCTAssertFalse(storyViewModel.isOpen)
+    }
+
 }
 
