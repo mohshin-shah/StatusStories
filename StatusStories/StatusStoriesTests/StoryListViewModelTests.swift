@@ -9,12 +9,24 @@
 import XCTest
 @testable import StatusStories
 
-struct StoryListViewModel {
+class StoryListViewModel {
+    
+    enum State: Equatable {
+        case list
+        case selected(StoryViewModel)
+    }
     
     private(set) var stories: [StoryViewModel]
+    var state: State
     
     init(stories: [StoryViewModel] = []) {
         self.stories = stories
+        self.state = .list
+    }
+    
+    func select(_ story: StoryViewModel) {
+        self.state = .selected(story)
+        story.setSelected(true)
     }
 }
 
@@ -52,6 +64,34 @@ class StatusStoriesTests: XCTestCase {
         let sut = makeStoryList(with: stories)
         
         XCTAssertTrue(sut.stories.count == numberOfStories)
+    }
+    
+    func test_initial_state() {
+        let sut = makeStoryList()
+        XCTAssertTrue(sut.state == .list)
+    }
+    
+    func test_select_story() {
+        let post = Post()
+        let storyViewModel = makeStory(with: [post])
+        let sut = makeStoryList(with: [storyViewModel])
+        
+        sut.select(storyViewModel)
+        
+        if case let StoryListViewModel.State.selected(selectedStory) = sut.state {
+            XCTAssertTrue(selectedStory == storyViewModel)
+        } else {
+            XCTFail()
+        }
+    }
+    
+    func test_select_story_should_open() {
+        let post = Post()
+        let storyViewModel = makeStory(with: [post])
+        let sut = makeStoryList(with: [storyViewModel])
+        
+        sut.select(storyViewModel)
+        XCTAssertTrue(storyViewModel.isOpen)
     }
 }
 

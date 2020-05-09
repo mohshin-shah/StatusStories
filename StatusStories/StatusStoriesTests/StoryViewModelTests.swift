@@ -8,19 +8,24 @@
 
 import XCTest
 
-struct Post {
-    
+struct Post: Equatable {
+    var text: String = ""
 }
 
-struct StoryViewModel {
+class StoryViewModel: NSObject {
     
     private(set) var posts: [Post]
+    private(set) var isOpen = false
     
     init?(posts: [Post]) {
         guard !posts.isEmpty else {
             return nil
         }
         self.posts = posts
+    }
+    
+    func setSelected(_ isSelected: Bool) {
+        isOpen = isSelected
     }
 }
 
