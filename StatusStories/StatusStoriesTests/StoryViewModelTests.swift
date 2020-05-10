@@ -16,16 +16,21 @@ class StoryViewModel: Equatable {
     
     private(set) var posts: [Post]
     private(set) var isOpen = false
+    private(set) var listStateListener: ListStateListener?
     
-    init?(posts: [Post]) {
+    init?(posts: [Post], listStateListener: ListStateListener? = nil) {
         guard !posts.isEmpty else {
             return nil
         }
         self.posts = posts
+        self.listStateListener = listStateListener
     }
     
     func setSelected(_ isSelected: Bool) {
         isOpen = isSelected
+        
+        let state: StoryListViewModel.State = isOpen ? .selected(self) : .list
+        listStateListener?.updateListState(to: state)
     }
     
     static func == (lhs: StoryViewModel, rhs: StoryViewModel) -> Bool {

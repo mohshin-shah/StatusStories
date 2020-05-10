@@ -14,8 +14,8 @@ func makeStoryList(with stories: [StoryViewModel] = []) -> StoryListViewModel {
     StoryListViewModel(stories: stories)
 }
 
-func makeStory(with posts: [Post]) -> StoryViewModel {
-    guard let storyViewModel = StoryViewModel(posts: posts) else {
+func makeStory(with posts: [Post], listStateListener: ListStateListener? = nil) -> StoryViewModel {
+    guard let storyViewModel = StoryViewModel(posts: posts, listStateListener: listStateListener) else {
         fatalError("StoryViewModel can not be created from the provided posts")
     }
     return storyViewModel

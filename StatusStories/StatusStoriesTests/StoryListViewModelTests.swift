@@ -9,6 +9,10 @@
 import XCTest
 @testable import StatusStories
 
+protocol ListStateListener {
+    func updateListState(to state: StoryListViewModel.State)
+}
+
 class StoryListViewModel {
     
     enum State: Equatable {
@@ -25,7 +29,6 @@ class StoryListViewModel {
     }
     
     func select(_ story: StoryViewModel) {
-        self.state = .selected(story)
         story.setSelected(true)
     }
 }
@@ -103,6 +106,4 @@ class StatusStoriesTests: XCTestCase {
         storyViewModel.setSelected(false)
         XCTAssertFalse(storyViewModel.isOpen)
     }
-
 }
-
