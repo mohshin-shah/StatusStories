@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  StatusStories
 //
-//  Created by Rushi Sangani on 05/05/20.
+//  Created by Status Stories on 05/05/20.
 //  Copyright © 2020 Status Stories. All rights reserved.
 //
 

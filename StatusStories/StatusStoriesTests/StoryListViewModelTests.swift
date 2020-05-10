@@ -2,7 +2,6 @@
 //  StatusStoriesTests.swift
 //  StatusStoriesTests
 //
-//  Created by Rushi Sangani on 05/05/20.
 //  Copyright © 2020 Status Stories. All rights reserved.
 //
 
