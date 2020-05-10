@@ -33,6 +33,16 @@ class StoryListViewModel {
     }
 }
 
+extension StoryListViewModel: StoryViewModelDelegate {
+    func didOpenStory(_ story: StoryViewModel) {
+        state = .selected(story)
+    }
+    
+    func didCloseStory() {
+        state = .list
+    }
+}
+
 class StatusStoriesTests: XCTestCase {
     
     // MARK: - Properties
@@ -78,6 +88,8 @@ class StatusStoriesTests: XCTestCase {
         let post = Post()
         let storyViewModel = makeStory(with: [post])
         let sut = makeStoryList(with: [storyViewModel])
+        
+        storyViewModel.delegate = sut
         
         sut.open(story: storyViewModel)
         

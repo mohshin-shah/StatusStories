@@ -12,9 +12,9 @@ struct Post: Equatable {
     var text: String = ""
 }
 
-protocol StoryViewModelDelegate {
-    func storyDidOpen()
-    func storyDidClose()
+protocol StoryViewModelDelegate: AnyObject {
+    func didOpenStory(_ story: StoryViewModel)
+    func didCloseStory()
 }
 
 class StoryViewModel: Equatable {
@@ -24,14 +24,14 @@ class StoryViewModel: Equatable {
     private(set) var isOpen = false {
         didSet {
             if isOpen {
-                delegate?.storyDidOpen()
+                delegate?.didOpenStory(self)
             } else {
-                delegate?.storyDidClose()
+                delegate?.didCloseStory()
             }
         }
     }
     
-    var delegate: StoryViewModelDelegate?
+    weak var delegate: StoryViewModelDelegate?
     
     init?(posts: [Post], delegate: StoryViewModelDelegate? = nil) {
         guard !posts.isEmpty else {
