@@ -23,14 +23,6 @@ class StoryListViewModel {
         self.stories = stories
         self.state = .list
     }
-    
-    func open(story: StoryViewModel) {
-        story.open()
-    }
-    
-    func close(story: StoryViewModel) {
-        story.close()
-    }
 }
 
 extension StoryListViewModel: StoryViewModelDelegate {
@@ -91,12 +83,24 @@ class StatusStoriesTests: XCTestCase {
         
         storyViewModel.delegate = sut
         
-        sut.open(story: storyViewModel)
+        storyViewModel.open()
         
         if case let StoryListViewModel.State.selected(selectedStory) = sut.state {
             XCTAssertTrue(selectedStory == storyViewModel)
         } else {
             XCTFail()
         }
-    }    
+    }
+    
+    func test_close_story_shouldChangeStateToList() {
+        let post = Post()
+        let storyViewModel = makeStory(with: [post])
+        let sut = makeStoryList(with: [storyViewModel])
+        
+        storyViewModel.delegate = sut
+        
+        storyViewModel.close()
+        
+        XCTAssertTrue(sut.state == .list)
+    }
 }
