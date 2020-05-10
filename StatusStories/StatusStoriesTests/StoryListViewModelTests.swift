@@ -9,10 +9,6 @@
 import XCTest
 @testable import StatusStories
 
-protocol ListStateListener {
-    func updateListState(to state: StoryListViewModel.State)
-}
-
 class StoryListViewModel {
     
     enum State: Equatable {
@@ -28,8 +24,12 @@ class StoryListViewModel {
         self.state = .list
     }
     
-    func select(_ story: StoryViewModel) {
-        story.setSelected(true)
+    func open(story: StoryViewModel) {
+        story.open()
+    }
+    
+    func close(story: StoryViewModel) {
+        story.close()
     }
 }
 
@@ -74,36 +74,17 @@ class StatusStoriesTests: XCTestCase {
         XCTAssertTrue(sut.state == .list)
     }
     
-    func test_selected_state() {
+    func test_open_story_shouldChangeStateToSelected() {
         let post = Post()
         let storyViewModel = makeStory(with: [post])
         let sut = makeStoryList(with: [storyViewModel])
         
-        sut.select(storyViewModel)
+        sut.open(story: storyViewModel)
         
         if case let StoryListViewModel.State.selected(selectedStory) = sut.state {
             XCTAssertTrue(selectedStory == storyViewModel)
         } else {
             XCTFail()
         }
-    }
-    
-    func test_open_story() {
-        let post = Post()
-        let storyViewModel = makeStory(with: [post])
-        let sut = makeStoryList(with: [storyViewModel])
-        
-        sut.select(storyViewModel)
-        XCTAssertTrue(storyViewModel.isOpen)
-    }
-    
-    func test_close_story() {
-        let post = Post()
-        let storyViewModel = makeStory(with: [post])
-        let sut = makeStoryList(with: [storyViewModel])
-        
-        sut.select(storyViewModel)
-        storyViewModel.setSelected(false)
-        XCTAssertFalse(storyViewModel.isOpen)
-    }
+    }    
 }

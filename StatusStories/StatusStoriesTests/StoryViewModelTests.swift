@@ -12,25 +12,41 @@ struct Post: Equatable {
     var text: String = ""
 }
 
+protocol StoryViewModelDelegate {
+    func storyDidOpen()
+    func storyDidClose()
+}
+
 class StoryViewModel: Equatable {
     
     private(set) var posts: [Post]
-    private(set) var isOpen = false
-    private(set) var listStateListener: ListStateListener?
     
-    init?(posts: [Post], listStateListener: ListStateListener? = nil) {
+    private(set) var isOpen = false {
+        didSet {
+            if isOpen {
+                delegate?.storyDidOpen()
+            } else {
+                delegate?.storyDidClose()
+            }
+        }
+    }
+    
+    var delegate: StoryViewModelDelegate?
+    
+    init?(posts: [Post], delegate: StoryViewModelDelegate? = nil) {
         guard !posts.isEmpty else {
             return nil
         }
         self.posts = posts
-        self.listStateListener = listStateListener
+        self.delegate = delegate
     }
     
-    func setSelected(_ isSelected: Bool) {
-        isOpen = isSelected
-        
-        let state: StoryListViewModel.State = isOpen ? .selected(self) : .list
-        listStateListener?.updateListState(to: state)
+    func open() {
+        isOpen = true
+    }
+    
+    func close() {
+        isOpen = false
     }
     
     static func == (lhs: StoryViewModel, rhs: StoryViewModel) -> Bool {
@@ -51,5 +67,19 @@ class StoryViewModelTests: XCTestCase {
         let posts = Array(0..<numberOfPosts).map { _ in Post() }
         let sut = makeStory(with: posts)
         XCTAssertTrue(sut.posts.count == numberOfPosts)
+    }
+    
+    func test_story_open() {
+        let post = Post()
+        let storyViewModel = makeStory(with: [post])
+        storyViewModel.open()
+        XCTAssertTrue(storyViewModel.isOpen)
+    }
+    
+    func test_story_close() {
+        let post = Post()
+        let storyViewModel = makeStory(with: [post])
+        storyViewModel.close()
+        XCTAssertFalse(storyViewModel.isOpen)
     }
 }
