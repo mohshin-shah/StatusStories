@@ -8,6 +8,10 @@
 
 import Foundation
 
+class StoryViewModel {
+    
+}
+
 class StoryListViewModel {
     
     enum State: Equatable {
@@ -15,10 +19,10 @@ class StoryListViewModel {
         case selected(StoryDetailViewModel)
     }
     
-    private(set) var stories: [StoryDetailViewModel]
+    private(set) var stories: [StoryViewModel]
     var state: State
     
-    init(stories: [StoryDetailViewModel] = []) {
+    init(stories: [StoryViewModel] = []) {
         self.stories = stories
         self.state = .list
     }

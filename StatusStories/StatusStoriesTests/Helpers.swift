@@ -11,13 +11,17 @@ import Foundation
 
 // MARK: Helpers
 
-func makeStoryList(with stories: [StoryDetailViewModel] = []) -> StoryListViewModel {
+func makeStoryList(with stories: [StoryViewModel] = []) -> StoryListViewModel {
     StoryListViewModel(stories: stories)
 }
 
-func makeStory(with posts: [Post], delegate: StoryDetailViewModelDelegate? = nil) -> StoryDetailViewModel {
+func makeStoryDetailViewModel(with posts: [Post], delegate: StoryDetailViewModelDelegate? = nil) -> StoryDetailViewModel {
     guard let storyViewModel = StoryDetailViewModel(posts: posts, delegate: delegate) else {
-        fatalError("StoryViewModel can not be created from the provided posts")
+        fatalError("StoryDetailViewModel can not be created from the provided posts")
     }
     return storyViewModel
+}
+
+func makeStory(with posts: [Post], delegate: StoryDetailViewModelDelegate? = nil) -> StoryViewModel {
+    StoryViewModel()
 }
