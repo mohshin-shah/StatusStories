@@ -1,6 +1,6 @@
 //
-//  StatusStoriesTests.swift
-//  StatusStoriesTests
+//  StoryListViewModelTests.swift
+//  StoryListViewModelTests
 //
 //  Copyright © 2020 Status Stories. All rights reserved.
 //
@@ -8,33 +8,7 @@
 import XCTest
 @testable import StatusStories
 
-class StoryListViewModel {
-    
-    enum State: Equatable {
-        case list
-        case selected(StoryViewModel)
-    }
-    
-    private(set) var stories: [StoryViewModel]
-    var state: State
-    
-    init(stories: [StoryViewModel] = []) {
-        self.stories = stories
-        self.state = .list
-    }
-}
-
-extension StoryListViewModel: StoryViewModelDelegate {
-    func didOpenStory(_ story: StoryViewModel) {
-        state = .selected(story)
-    }
-    
-    func didCloseStory() {
-        state = .list
-    }
-}
-
-class StatusStoriesTests: XCTestCase {
+class StoryListViewModelTests: XCTestCase {
     
     // MARK: - Properties
     
