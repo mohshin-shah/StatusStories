@@ -14,7 +14,7 @@ protocol StoryDetailViewModelDelegate: AnyObject {
 }
 
 class StoryDetailViewModel {
-        
+            
     weak var delegate: StoryDetailViewModelDelegate?
     
     // MARK: Private Properties

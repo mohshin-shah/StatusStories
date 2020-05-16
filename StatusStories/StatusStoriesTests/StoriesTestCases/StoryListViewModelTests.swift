@@ -12,42 +12,60 @@ class StoryListViewModelTests: XCTestCase {
     
     // MARK: - Properties
     
-    let sut = StoryListViewModel()
+    lazy var stories: [StoryViewModel] = {
+        [
+            StoryViewModel(story: Story(authorName: "User1", posts: [Post()])),
+            StoryViewModel(story: Story(authorName: "User2", posts: [Post()])),
+            StoryViewModel(story: Story(authorName: "User3", posts: [Post()])),
+            StoryViewModel(story: Story(authorName: "User4", posts: [Post()])),
+            StoryViewModel(story: Story(authorName: "User5", posts: [Post()])),
+        ]
+    }()
     
     override func setUp() {
         super.setUp()
     }
-        
-    func test_initialize() {
-        let sut = makeStoryList()
-        XCTAssertNotNil(sut)
+            
+    func test_initialize_list_withStories() {
+        let sut = StoryListViewModel(stories: stories)
+        XCTAssertTrue(sut.stories.count == stories.count)
     }
     
-    func test_initialize_no_stories() {
-        let sut = makeStoryList()
-        XCTAssertTrue(sut.stories.isEmpty)
-    }
+    func test_append_to_storyList() {
+        let story6 = StoryViewModel(story: Story(authorName: "User6", posts: [Post()]))
+        let story7 = StoryViewModel(story: Story(authorName: "User7", posts: [Post()]))
         
-    func test_insert_one() {
-        let post = Post()
-        let story = makeStory(with: [post])
-        let sut = makeStoryList(with: [story])
+        let sut = StoryListViewModel()
+        sut.add(story6)
+        sut.add(story7)
         
-        XCTAssertTrue(sut.stories.count == 1)
+        XCTAssertTrue(sut.stories.count == 2)
     }
     
-    func test_insert_many() {
-        let numberOfStories = 5
-        let stories = Array(0..<numberOfStories).map { _ in makeStory(with: [Post()]) }
-        let sut = makeStoryList(with: stories)
+
+    func test_append_to_storyList_many() {
+        let story6 = StoryViewModel(story: Story(authorName: "User6", posts: [Post()]))
+        let story7 = StoryViewModel(story: Story(authorName: "User7", posts: [Post()]))
         
-        XCTAssertTrue(sut.stories.count == numberOfStories)
+        let sut = StoryListViewModel()
+        sut.add([story6, story7])
+        
+        XCTAssertTrue(sut.stories.count == 2)
     }
     
-    func test_initial_state() {
-        let sut = makeStoryList()
-        XCTAssertTrue(sut.state == .list)
+    func test_storyList_hasCorrectSequence() {
+        let sut = StoryListViewModel(stories: stories)
+        XCTAssertEqual(sut.stories[0], stories[0])
+        XCTAssertEqual(sut.stories[1], stories[1])
+        XCTAssertNotEqual(sut.stories[0], stories[1])
     }
+}
+
+
+//    func test_initial_state() {
+//        let sut = makeStoryList()
+//        XCTAssertTrue(sut.state == .list)
+//    }
     
 //    func test_open_story_shouldChangeStateToSelected() {
 //        let post = Post()
@@ -76,4 +94,3 @@ class StoryListViewModelTests: XCTestCase {
 //
 //        XCTAssertTrue(sut.state == .list)
 //    }
-}

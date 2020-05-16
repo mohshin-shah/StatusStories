@@ -8,35 +8,39 @@
 
 import Foundation
 
+struct Story: Equatable {
+    let authorName: String
+    let posts: [Post]
+}
+
 class StoryViewModel {
+    let story: Story
     
+    init(story: Story) {
+        self.story = story
+    }
+}
+
+extension StoryViewModel: Equatable {
+    static func == (lhs: StoryViewModel, rhs: StoryViewModel) -> Bool {
+        lhs.story == rhs.story
+    }
 }
 
 class StoryListViewModel {
-    
-    enum State: Equatable {
-        case list
-        case selected(StoryDetailViewModel)
-    }
-    
+        
     private(set) var stories: [StoryViewModel]
-    var state: State
     
     init(stories: [StoryViewModel] = []) {
         self.stories = stories
-        self.state = .list
+    }
+    
+    func add(_ story: StoryViewModel) {
+        stories.append(story)
+    }
+    
+    func add(_ newStories: [StoryViewModel]) {
+        stories.append(contentsOf: newStories)
     }
 }
 
-// MARK: StoryDetailViewModelDelegate methods
-
-extension StoryListViewModel: StoryDetailViewModelDelegate {
-    
-    func didOpenStory(_ story: StoryDetailViewModel) {
-        state = .selected(story)
-    }
-    
-    func didCloseStory() {
-        state = .list
-    }
-}
