@@ -21,9 +21,13 @@ class StoryViewModel {
     }
 }
 
-extension StoryViewModel: Equatable {
+extension StoryViewModel: Equatable, Hashable {
     static func == (lhs: StoryViewModel, rhs: StoryViewModel) -> Bool {
         lhs.story == rhs.story
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(story.authorName)
     }
 }
 
