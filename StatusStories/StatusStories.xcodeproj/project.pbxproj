@@ -17,10 +17,10 @@
 		A2F3577E2461C49A009E94B3 /* StatusStoriesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F3577D2461C49A009E94B3 /* StatusStoriesUITests.swift */; };
 		A2F3578C2461C5B9009E94B3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A2F3578B2461C5B9009E94B3 /* README.md */; };
 		FB5F18C92465655F002757C2 /* StoryDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5F18C82465655F002757C2 /* StoryDetailViewModelTests.swift */; };
-		FB5F18CB24656625002757C2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB5F18CA24656625002757C2 /* Helpers.swift */; };
 		FB90AC95246FB343005A5C08 /* StoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB90AC94246FB343005A5C08 /* StoryListViewModel.swift */; };
 		FB90AC98246FB371005A5C08 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB90AC97246FB371005A5C08 /* Post.swift */; };
 		FB90AC9A246FB410005A5C08 /* StoryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB90AC99246FB410005A5C08 /* StoryDetailViewModel.swift */; };
+		FB90ACA1246FCEE6005A5C08 /* StoryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB90ACA0246FCEE6005A5C08 /* StoryViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,10 +57,10 @@
 		A2F3577F2461C49A009E94B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A2F3578B2461C5B9009E94B3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FB5F18C82465655F002757C2 /* StoryDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDetailViewModelTests.swift; sourceTree = "<group>"; };
-		FB5F18CA24656625002757C2 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		FB90AC94246FB343005A5C08 /* StoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryListViewModel.swift; sourceTree = "<group>"; };
 		FB90AC97246FB371005A5C08 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		FB90AC99246FB410005A5C08 /* StoryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDetailViewModel.swift; sourceTree = "<group>"; };
+		FB90ACA0246FCEE6005A5C08 /* StoryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +135,6 @@
 		A2F357712461C49A009E94B3 /* StatusStoriesTests */ = {
 			isa = PBXGroup;
 			children = (
-				FB5F18CA24656625002757C2 /* Helpers.swift */,
 				FB90AC9C246FB86E005A5C08 /* StoriesTestCases */,
 				A2F357742461C49A009E94B3 /* Info.plist */,
 			);
@@ -190,6 +189,7 @@
 			children = (
 				A2F357722461C49A009E94B3 /* StoryListViewModelTests.swift */,
 				FB5F18C82465655F002757C2 /* StoryDetailViewModelTests.swift */,
+				FB90ACA0246FCEE6005A5C08 /* StoryViewModelTests.swift */,
 			);
 			path = StoriesTestCases;
 			sourceTree = "<group>";
@@ -339,8 +339,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB90ACA1246FCEE6005A5C08 /* StoryViewModelTests.swift in Sources */,
 				FB5F18C92465655F002757C2 /* StoryDetailViewModelTests.swift in Sources */,
-				FB5F18CB24656625002757C2 /* Helpers.swift in Sources */,
 				A2F357732461C49A009E94B3 /* StoryListViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
